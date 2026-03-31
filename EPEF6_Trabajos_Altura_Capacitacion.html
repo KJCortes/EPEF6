@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capacitación EPEF N°6 – Trabajos en Altura | Mantoverde</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:#1c1c1c}
+  header{background:#CC4E10;color:#fff;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+  header h1{font-size:1.05rem;font-weight:600;letter-spacing:.5px}
+  header span{font-size:.8rem;opacity:.85}
+  .hero{background:#1c1c1c;color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .badge{display:inline-block;background:rgba(204,78,16,.25);border:1px solid #CC4E10;color:#ffb38a;font-size:.75rem;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:1rem}
+  .hero h2{font-size:2.6rem;font-weight:700;line-height:1.15}
+  .hero h2 span{color:#CC4E10}
+  .hero p{margin-top:.75rem;color:#aaa;font-size:1rem}
+  .hero-meta{margin-top:1.5rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+  .hero-meta .num{font-size:2rem;font-weight:700;color:#CC4E10}
+  .hero-meta .lbl{font-size:.75rem;color:#888;margin-top:2px}
+  nav.tabs{background:#fff;border-bottom:2px solid #e8e4de;display:flex;overflow-x:auto;position:sticky;top:57px;z-index:99}
+  nav.tabs button{flex-shrink:0;background:none;border:none;padding:.85rem 1.4rem;font-size:.88rem;cursor:pointer;color:#6b6b6b;font-weight:500;border-bottom:3px solid transparent;transition:all .15s;white-space:nowrap}
+  nav.tabs button.active{color:#CC4E10;border-bottom-color:#CC4E10}
+  nav.tabs button:hover:not(.active){color:#1c1c1c;background:#faf8f5}
+  .section{display:none;max-width:960px;margin:2rem auto;padding:0 1.5rem 4rem}
+  .section.show{display:block}
+  .card{background:#fff;border-radius:12px;border:1px solid #e8e4de;margin-bottom:1.25rem;overflow:hidden}
+  .card-header{background:#1c1c1c;color:#fff;padding:.75rem 1.25rem;font-size:.95rem;font-weight:600;display:flex;align-items:center;gap:.75rem}
+  .card-header .dot{width:10px;height:10px;border-radius:50%;background:#CC4E10;flex-shrink:0}
+  .card-body{padding:1.25rem}
+  .card-body p,.card-body li{font-size:.92rem;line-height:1.65;color:#333}
+  .card-body ul{padding-left:1.3rem}
+  .card-body li{margin-bottom:.35rem}
+  .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.25rem}
+  .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.25rem}
+  .info-box{background:#fff;border:1px solid #e8e4de;border-radius:12px;overflow:hidden}
+  .info-box .ib-top{background:#CC4E10;height:5px}
+  .info-box .ib-body{padding:1.1rem}
+  .info-box .ib-icon{width:40px;height:40px;border-radius:10px;background:#faece7;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:.75rem}
+  .info-box h4{font-size:.92rem;font-weight:600;color:#1c1c1c;margin-bottom:.5rem}
+  .info-box p{font-size:.85rem;color:#6b6b6b;line-height:1.55}
+  .rule-row{display:flex;align-items:stretch;margin-bottom:.5rem;border-radius:8px;overflow:hidden;border:1px solid #e8e4de}
+  .rule-row .rr-label{background:#CC4E10;color:#fff;font-size:.82rem;font-weight:600;padding:.65rem .9rem;min-width:160px;display:flex;align-items:center}
+  .rule-row .rr-val{background:#fff;padding:.65rem .9rem;font-size:.85rem;color:#333;display:flex;align-items:center;flex:1;flex-wrap:wrap;gap:4px}
+  .alert{background:#fff3ed;border-left:4px solid #CC4E10;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:1rem;font-size:.9rem;color:#7a2800}
+  .danger{background:#fcebeb;border-left:4px solid #c0392b;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:.75rem;font-size:.88rem;color:#7b1f1f}
+  .ok-box{background:#eaf3de;border-left:4px solid #1e7b34;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:.75rem;font-size:.88rem;color:#1e4a24}
+  .info-bar{background:#e6f1fb;border-left:4px solid #185fa5;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:.75rem;font-size:.88rem;color:#0c447c}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+  @media(max-width:640px){.two-col{grid-template-columns:1fr}}
+  .tag{display:inline-block;font-size:.75rem;padding:2px 10px;border-radius:20px;margin:2px}
+  .tag.red{background:#fcebeb;color:#a32d2d}
+  .tag.green{background:#eaf3de;color:#1e7b34}
+  .tag.blue{background:#e6f1fb;color:#185fa5}
+  .tag.amber{background:#faeeda;color:#854f0b}
+  /* Jerarquía caídas */
+  .jer-item{display:flex;align-items:center;gap:12px;margin-bottom:6px;border-radius:8px;padding:.6rem 1rem;font-size:.88rem;font-weight:600}
+  .jer-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;color:#fff}
+  .jer-sub{font-size:.78rem;font-weight:400;color:#666;margin-top:2px}
+  /* Andamio tarjetas */
+  .tarjeta-andamio{border-radius:8px;padding:.75rem 1rem;text-align:center;font-weight:700;font-size:.95rem;border:3px solid}
+  /* QUIZ */
+  .q-num{font-size:.8rem;color:#aaa;margin-bottom:.35rem}
+  .q-text{font-size:1rem;font-weight:600;color:#1c1c1c;margin-bottom:1rem}
+  .opt{background:#f5f3ef;border:1px solid #e8e4de;border-radius:8px;padding:.75rem 1rem;margin-bottom:.6rem;cursor:pointer;font-size:.9rem;color:#1c1c1c;transition:all .12s}
+  .opt:hover{background:#faece7;border-color:#CC4E10}
+  .opt.correct{background:#eaf3de;border-color:#1e7b34;color:#1e4a24}
+  .opt.wrong{background:#fcebeb;border-color:#c0392b;color:#7b1f1f}
+  .feedback{font-size:.85rem;margin-top:.75rem;padding:.75rem 1rem;border-radius:8px;display:none}
+  .feedback.ok-f{background:#eaf3de;color:#1e4a24}
+  .feedback.err-f{background:#fcebeb;color:#7b1f1f}
+  .progress-wrap{background:#e8e4de;border-radius:4px;height:5px;margin-bottom:1.25rem;overflow:hidden}
+  .progress-fill{height:100%;background:#CC4E10;transition:width .3s;border-radius:4px}
+  #next-btn{display:none;background:#CC4E10;color:#fff;border:none;border-radius:8px;padding:.6rem 1.4rem;font-size:.9rem;cursor:pointer;margin-top:.75rem}
+  .score-wrap{text-align:center;padding:2rem}
+  .score-wrap .score-icon{font-size:3rem;margin-bottom:.75rem}
+  .score-wrap h3{font-size:1.5rem;font-weight:700}
+  .score-wrap p{margin-top:.5rem}
+  #restart-btn{background:#CC4E10;color:#fff;border:none;border-radius:8px;padding:.65rem 1.6rem;font-size:.9rem;cursor:pointer;margin-top:.75rem}
+  .name-form{margin-bottom:1.5rem}
+  .name-form label{display:block;font-size:.85rem;color:#6b6b6b;margin-bottom:.4rem;font-weight:500}
+  .name-form input{width:100%;max-width:400px;padding:.65rem 1rem;border:1.5px solid #e8e4de;border-radius:8px;font-size:.95rem;font-family:'Segoe UI',Arial,sans-serif;outline:none;transition:border .15s}
+  .name-form input:focus{border-color:#CC4E10}
+  #cert-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:999;align-items:center;justify-content:center;padding:1rem}
+  #cert-overlay.show{display:flex}
+  #cert-box{background:#fff;border-radius:16px;max-width:680px;width:100%;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .cert-top{background:#1c1c1c;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between}
+  .cert-top span{color:#CC4E10;font-weight:700;letter-spacing:1.5px;font-size:.8rem}
+  .cert-top button{background:none;border:none;color:#aaa;font-size:1.4rem;cursor:pointer}
+  .cert-body{padding:2rem 2.5rem;text-align:center}
+  .cert-seal{width:80px;height:80px;border-radius:50%;background:#1c1c1c;border:4px solid #CC4E10;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1.25rem}
+  .cert-name{font-size:1.5rem;color:#CC4E10;font-weight:700;border-bottom:2px solid #CC4E10;display:inline-block;padding-bottom:4px;margin:1rem 0 .5rem}
+  .cert-meta{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .cert-meta .cm-val{font-size:1.1rem;font-weight:700;color:#1c1c1c}
+  .cert-meta .cm-lbl{font-size:.75rem;color:#999;margin-top:2px}
+  .cert-divider{border:none;border-top:1px dashed #e8e4de;margin:1.25rem 0}
+  .cert-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+  .cert-actions button{padding:.6rem 1.4rem;border-radius:8px;font-size:.88rem;cursor:pointer;font-family:'Segoe UI',Arial,sans-serif}
+  .btn-print{background:#CC4E10;color:#fff;border:none}
+  .btn-close{background:#fff;color:#1c1c1c;border:1.5px solid #e8e4de}
+  @media print{
+    body>*:not(#cert-overlay){display:none!important}
+    #cert-overlay{display:flex!important;position:static;background:none;padding:0}
+    #cert-box{box-shadow:none;border-radius:0;max-width:100%}
+    .cert-top button,.cert-actions{display:none!important}
+    .cert-top{background:#1c1c1c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .cert-seal{background:#1c1c1c!important;border-color:#CC4E10!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+  footer{background:#1c1c1c;color:#888;text-align:center;padding:1.5rem;font-size:.8rem}
+  footer strong{color:#CC4E10}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⛏ Capstone Copper · Mantoverde — EPEF N°6 Trabajos en Altura</h1>
+  <span>CC.MV.GSSO.E006 · v0 · 01/12/2023</span>
+</header>
+
+<div class="hero">
+  <div class="badge">ESTÁNDAR PARA LA ELIMINACIÓN DE FATALIDADES</div>
+  <h2>Trabajos <span>en Altura</span></h2>
+  <p>Capacitación simplificada para todo el personal y contratistas de Mantoverde</p>
+  <div class="hero-meta">
+    <div><div class="num">1,8m</div><div class="lbl">altura mínima que activa este estándar</div></div>
+    <div><div class="num">22 KN</div><div class="lbl">resistencia mínima punto de anclaje</div></div>
+    <div><div class="num">15 min</div><div class="lbl">tiempo máximo suspendido antes de trauma</div></div>
+    <div><div class="num">100%</div><div class="lbl">tiempo anclado en andamios</div></div>
+  </div>
+</div>
+
+<nav class="tabs" id="tabs">
+  <button class="active" onclick="show('intro')">¿De qué trata?</button>
+  <button onclick="show('equipos')">Equipos y EPP</button>
+  <button onclick="show('plataformas')">Andamios y plataformas</button>
+  <button onclick="show('reglas')">Reglas clave</button>
+  <button onclick="show('quiz')">Verifica lo aprendido</button>
+</nav>
+
+<!-- ══════════ INTRO ══════════ -->
+<div class="section show" id="s-intro">
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>¿Cuándo aplica este estándar?</div>
+    <div class="card-body">
+      <div class="alert">⚠️ Aplica cuando existe el potencial de caída desde <strong>1,8 metros o más</strong>, o cuando una persona se encuentre a <strong>menos de 2 metros de un borde abierto</strong> con potencial de caída de 1,8 m o más.</div>
+      <div class="info-bar">ℹ️ También aplica a alturas menores de 1,8 m si la evaluación de riesgos identifica alto potencial de lesiones incapacitantes.</div>
+      <p style="margin-top:.75rem;font-size:.9rem">Cubre: plataformas elevadas móviles o portátiles, jaulas, andamios, objetos que pudieran caer y causar lesiones.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Jerarquía de protección de caídas — del más al menos preferido</div>
+    <div class="card-body">
+      <div class="jer-item" style="background:#eaf3de"><div class="jer-num" style="background:#1e7b34">1</div><div><strong style="color:#1e4a24">Eliminación o Sustitución</strong><div class="jer-sub">Bajar la superficie de trabajo al nivel del suelo o cambiar el proceso para que nadie alcance la zona de caída. Es la medida más efectiva.</div></div></div>
+      <div class="jer-item" style="background:#e6f1fb"><div class="jer-num" style="background:#185fa5">2</div><div><strong style="color:#0c447c">Sistema de Protección Pasivo</strong><div class="jer-sub">Aislar el peligro: instalar barandas o cubrir aberturas en el suelo. No requiere acción del trabajador.</div></div></div>
+      <div class="jer-item" style="background:#faeeda"><div class="jer-num" style="background:#854f0b">3</div><div><strong style="color:#633806">Restricción de Caídas</strong><div class="jer-sub">Asegurar a la persona con un cabo de vida suficientemente corto para que no alcance el borde de caída.</div></div></div>
+      <div class="jer-item" style="background:#faece7"><div class="jer-num" style="background:#CC4E10">4</div><div><strong style="color:#7a2800">Detención de Caídas</strong><div class="jer-sub">Sistema diseñado para detener a la persona después de que una caída ya comenzó. ACC + estrobo o línea de vida autorretráctil.</div></div></div>
+      <div class="jer-item" style="background:#fcebeb"><div class="jer-num" style="background:#c0392b">5</div><div><strong style="color:#7b1f1f">Controles Administrativos</strong><div class="jer-sub">Señales de advertencia, entrenamiento, procedimientos. Última opción cuando no aplican las anteriores.</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Términos clave que debes conocer</div>
+    <div class="card-body">
+      <div class="grid-2">
+        <div class="info-box"><div class="ib-top"></div><div class="ib-body"><div class="ib-icon">🦺</div><h4>ACC — Arnés de Cuerpo Completo</h4><p>Dispositivo que sujeta al trabajador durante y después de una caída. Debe ser al menos <strong>Clase A</strong>. El punto de conexión principal está en la espalda, entre los omóplatos.</p></div></div>
+        <div class="info-box"><div class="ib-top"></div><div class="ib-body"><div class="ib-icon">🔗</div><h4>SPDC — Sistema Personal Detención de Caídas</h4><p>Conjunto completo: ACC + conector + dispositivo de anclaje. Detiene la caída cuando se conecta a un punto de anclaje seguro.</p></div></div>
+        <div class="info-box"><div class="ib-top"></div><div class="ib-body"><div class="ib-icon">🎯</div><h4>Punto de anclaje</h4><p>Punto seguro donde se fija el SPDC. Debe soportar <strong>mínimo 22 KN</strong> (~2.226 kg). Debe ser independiente de los anclajes de andamios o plataformas.</p></div></div>
+        <div class="info-box"><div class="ib-top"></div><div class="ib-body"><div class="ib-icon">🩹</div><h4>Trauma por suspensión</h4><p>Peligro fatal si una persona queda colgada del arnés más de <strong>15 minutos</strong>. El flujo sanguíneo se restringe. El rescate debe ser inmediato.</p></div></div>
+        <div class="info-box"><div class="ib-top"></div><div class="ib-body"><div class="ib-icon">⚡</div><h4>Estrobo amortiguador (EAI)</h4><p>Absorbe energía durante la caída deformándose. Elongación máxima: <strong>1,1 metros</strong>. Se suma a la cuerda de 1,8 m al calcular el espacio libre.</p></div></div>
+        <div class="info-box"><div class="ib-top"></div><div class="ib-body"><div class="ib-icon">🎗️</div><h4>Cinta anti-trauma</h4><p>Estribo complementario del arnés. Permite al trabajador apoyarse en ella si queda suspendido, aliviando la presión inguinal para ganar tiempo de rescate.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ EQUIPOS ══════════ -->
+<div class="section" id="s-equipos">
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Clases de arnés ACC — cuál usar según el trabajo</div>
+    <div class="card-body">
+      <div class="rule-row"><div class="rr-label">Clase A — Base</div><div class="rr-val"><strong>Obligatorio siempre.</strong> Para detención de caídas. Punto de conexión en la espalda entre los omóplatos. Requerido en todos los trabajos en altura.</div></div>
+      <div class="rule-row"><div class="rr-label">Clase D</div><div class="rr-val">Cumple Clase A + elementos para <strong>ascenso/descenso controlado</strong>. Permite posición sentado en suspensión. No conectar sus ganchos D al SPDC.</div></div>
+      <div class="rule-row"><div class="rr-label">Clase E</div><div class="rr-val">Cumple Clase A + elementos para <strong>acceso a espacios confinados</strong>. Con fijación deslizante en cada cinta de hombro. Se usan en par, no por separado. No conectar al SPDC.</div></div>
+      <div class="rule-row"><div class="rr-label">Clase P</div><div class="rr-val">Cumple Clase A + elementos para <strong>posicionamiento de trabajo</strong>. Fijación al nivel de la cintura. Se usan en par, no por separado. No conectar al SPDC.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Puntos de anclaje — lo que debes saber</div>
+    <div class="card-body">
+      <div class="alert"><strong>Los puntos de anclaje deben soportar mínimo 22 KN (~2.226 kg).</strong> Deben ser independientes de cualquier anclaje usado para soportar andamios o plataformas de trabajo.</div>
+      <div class="two-col">
+        <div>
+          <p style="font-size:.88rem;font-weight:600;color:#CC4E10;margin-bottom:.4rem">✅ Hacer</p>
+          <ul style="font-size:.85rem;color:#333">
+            <li>Seleccionar el anclaje sobre la cabeza del trabajador (Factor de Caída 0)</li>
+            <li>Reducir la distancia total de caída libre al mínimo posible</li>
+            <li>Verificar espacio libre suficiente en el recorrido de caída</li>
+            <li>Usar faja conectora alrededor de vigas para proteger la línea</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:.88rem;font-weight:600;color:#c0392b;margin-bottom:.4rem">❌ No hacer</p>
+          <ul style="font-size:.85rem;color:#333">
+            <li>No anclar donde el trabajador quede sobre el punto de anclaje (aumenta caída libre)</li>
+            <li>No anclar en puntos que presenten obstáculos en la trayectoria de caída</li>
+            <li>No usar el andamio como punto de anclaje del SPDC</li>
+            <li>No usar mosquetones bajo presión sobre el seguro</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-bar" style="margin-top:.5rem">ℹ️ <strong>Factor de Caída:</strong> debe ser siempre menor a 1. Factor 0 = anclaje sobre la cabeza (más seguro). Factor 1 = anclaje a nivel cintura. Factor 2 = anclaje a nivel piso (más peligroso).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Requisitos para usar el SPDC</div>
+    <div class="card-body">
+      <ul style="font-size:.9rem;color:#333">
+        <li>Contar con <strong>Licencia Interna para Trabajos en Altura</strong> vigente</li>
+        <li>Tener capacitación teórica/práctica de persona calificada (OTEC, mutualidad, fabricante)</li>
+        <li>Inspeccionar el arnés y todos sus componentes <strong>antes de cada uso</strong></li>
+        <li>Verificar que el punto de anclaje sea el apropiado</li>
+        <li>Usar <strong>cinta anti-trauma</strong> para prevenir trauma por suspensión</li>
+        <li>Tener el examen médico de aptitud para trabajo en altura aprobado y vigente</li>
+      </ul>
+      <div class="danger" style="margin-top:.75rem">❌ El uso de <strong>cinturones de detención de caídas está prohibido</strong>, salvo linieros especialmente entrenados para subir postes.</div>
+      <div class="danger">❌ Todo equipo que haya sufrido el impacto de una caída debe ser <strong>separado y desechado inmediatamente</strong>.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Autorización para trabajos en altura — exámenes requeridos</div>
+    <div class="card-body">
+      <div class="two-col">
+        <div>
+          <strong style="color:#CC4E10;display:block;margin-bottom:.5rem">Tipo A — Hasta 10 metros</strong>
+          <ul style="font-size:.85rem;color:#333">
+            <li>Examen médico de aptitud física Tipo A</li>
+            <li>Certificado de capacitación aprobada</li>
+            <li>Aprobación curso "Procedimiento Trabajo en Altura Mantoverde"</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="color:#CC4E10;display:block;margin-bottom:.5rem">Tipo B — Sobre 10 metros</strong>
+          <ul style="font-size:.85rem;color:#333">
+            <li>Examen médico de aptitud física Tipo B (más exigente)</li>
+            <li>Mismos requisitos que Tipo A</li>
+            <li>Credenciales otorgadas por Gerencia SSO de Mantoverde</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-bar" style="margin-top:.5rem">ℹ️ Si un trabajador tiene una desviación, se le retiene la Licencia Interna hasta ser reinstruido y evaluado nuevamente.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PLATAFORMAS ══════════ -->
+<div class="section" id="s-plataformas">
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Andamios — marcas permitidas y sistema de tarjetas</div>
+    <div class="card-body">
+      <div class="alert"><strong>En Mantoverde solo está permitido el uso de andamios marca LAYHER – PERI – ULMA.</strong> Los armadores ("Andamieros") deben tener Licencia Interna de Andamiero otorgada por la Gerencia de Seguridad.</div>
+      <div class="two-col" style="margin-top:.75rem">
+        <div class="tarjeta-andamio" style="background:#eaf3de;border-color:#1e7b34;color:#1e4a24">
+          🟢 ANDAMIO OPERATIVO<br><span style="font-size:.8rem;font-weight:400;margin-top:4px;display:block">Andamio en condiciones de ser usado. Todo trabajador autorizado puede subir.</span>
+        </div>
+        <div class="tarjeta-andamio" style="background:#fcebeb;border-color:#c0392b;color:#7b1f1f">
+          🔴 ANDAMIO NO OPERATIVO<br><span style="font-size:.8rem;font-weight:400;margin-top:4px;display:block">En armado, modificación, reparación o desarme. NADIE puede subir excepto el personal de andamios y supervisores autorizados.</span>
+        </div>
+      </div>
+      <div class="danger" style="margin-top:.75rem">❌ Retirar una tarjeta sin autorización es considerada <strong>FALTA GRAVE</strong>.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Reglas clave al trabajar sobre un andamio</div>
+    <div class="card-body">
+      <ul>
+        <li>Estar anclado el <strong>100% del tiempo</strong> a la línea de vida o estructura, usando línea de seguridad de <strong>tres puntas ("Y")</strong></li>
+        <li>Solo para desplazarse se puede soltar una línea, manteniendo siempre la segunda unida</li>
+        <li><strong>No pararse sobre las barandas</strong> ni estirarse por sobre los pasamanos</li>
+        <li><strong>No modificar el andamio</strong> a menos de ser andamiero certificado y autorizado</li>
+        <li>Las herramientas sueltas van en <strong>cajones o baldes</strong> para evitar caída de objetos</li>
+        <li>Las <strong>líneas de seguridad NO se anclan al andamio</strong> — deben anclarse a estructura adyacente con resistencia de 22 KN por persona</li>
+        <li>El cierre perimetral del área debe estar a <strong>distancia mínima = mitad de la altura del andamio</strong></li>
+        <li><strong>Prohibido usar conos o cintas de peligro</strong> para delimitar el área — se usan barreras duras</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Alza hombre (plataforma elevadora) — requisitos mínimos</div>
+    <div class="card-body">
+      <div class="two-col">
+        <ul style="font-size:.85rem;color:#333">
+          <li>Baranda perimetral mínima de <strong>1,10 m</strong></li>
+          <li>Zócalo (rodapié) de <strong>0,15 m</strong></li>
+          <li>Puerta que abre hacia adentro o deslizante</li>
+          <li>Piso antideslizante que permita paso de agua</li>
+          <li>Alarma sonora de movimiento</li>
+          <li>Sistema de mando primario en plataforma + secundario desde el suelo</li>
+        </ul>
+        <ul style="font-size:.85rem;color:#333">
+          <li>Punto de anclaje para SPDC del usuario</li>
+          <li>Sistema antivuelco con aviso de inclinación</li>
+          <li>Sistema auxiliar de bajada de emergencia</li>
+          <li>Inspección máximo cada <strong>2 años</strong> por persona competente</li>
+          <li>Check list de preuso vigente</li>
+          <li>Sin modificaciones fuera de fábrica</li>
+        </ul>
+      </div>
+      <div class="danger" style="margin-top:.5rem">❌ <strong>Prohibido</strong> usar canastillo y grúa para izar personas. Solo equipos especialmente diseñados para eso.</div>
+      <div class="danger">❌ <strong>Prohibido</strong> desplazar la plataforma mientras el trabajador esté en posición elevada o en condiciones de viento fuerte (30 km/h).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Remoción de parrillas de piso (grating)</div>
+    <div class="card-body">
+      <div class="alert"><strong>Toda remoción de parrillas requiere Permiso de Trabajo + AST firmado por el supervisor.</strong></div>
+      <ul style="font-size:.88rem;color:#333">
+        <li>Instalar barrera dura en el perímetro. <span class="tag red">Prohibido: conos o cintas de peligro</span></li>
+        <li>Señalizar todos los puntos de entrada con <strong>"PELIGRO – PISO DESPROTEGIDO"</strong></li>
+        <li>Niveles inferiores también deben ser protegidos y señalizados</li>
+        <li>Todos los participantes deben estar acreditados para trabajo en altura</li>
+        <li>Usar ACC anclado a punto aprobado, más arnés especial para herramientas</li>
+        <li>Si hay trabajo en caliente: obtener también Permiso de Trabajo en Caliente</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Escaleras — regla importante en Mantoverde</div>
+    <div class="card-body">
+      <div class="danger">❌ <strong>Las escaleras de todo tipo NO se pueden usar como plataformas de trabajo.</strong> Solo sirven para subir o bajar de un nivel a otro.</div>
+      <div class="ok-box" style="margin-top:.5rem">✅ Excepción: escaleras tipo avión/aeropuerto (con superficie plana y barandas estandarizadas en la parte superior).</div>
+      <div class="ok-box">✅ Las escaleras verticales superiores a 1,8 m deben tener líneas de vida verticales instaladas, a las cuales deben estar afianzados los usuarios.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ REGLAS ══════════ -->
+<div class="section" id="s-reglas">
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Reglas absolutas al trabajar en altura</div>
+    <div class="card-body">
+      <div class="danger">❌ <strong>NUNCA</strong> trabajar en altura sin Licencia Interna vigente y examen médico de aptitud aprobado.</div>
+      <div class="danger">❌ <strong>NUNCA</strong> trabajar en altura solo. Siempre debe haber un segundo trabajador que pueda gatillar el plan de emergencia.</div>
+      <div class="danger">❌ <strong>NUNCA</strong> conectar dos mosquetones entre sí.</div>
+      <div class="danger">❌ <strong>NUNCA</strong> desconectar o modificar una línea de vida sin autorización de supervisión.</div>
+      <div class="ok-box">✅ Todas las herramientas manuales deben tener sistema de amarre para evitar su caída desde altura.</div>
+      <div class="ok-box">✅ El área por debajo de cualquier trabajo en altura debe estar demarcada indicando los riesgos.</div>
+      <div class="ok-box">✅ Todo trabajo no rutinario en altura que no esté cubierto por procedimiento escrito requiere <strong>Permiso de Trabajo</strong>.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Trauma por suspensión — emergencia crítica</div>
+    <div class="card-body">
+      <div class="danger">⚠️ Una persona colgada del arnés en posición vertical puede sufrir trauma por suspensión en <strong>menos de 15 minutos</strong>. El rescate debe ser inmediato.</div>
+      <p style="margin-bottom:.75rem;font-size:.9rem">Síntomas: desfallecimiento, náusea, mareo, sudor, palidez, visión limitada.</p>
+      <div class="rule-row"><div class="rr-label">Durante la suspensión</div><div class="rr-val">Usar cintas anti-trauma para apoyarse y aliviar la presión inguinal. Moverse si es posible.</div></div>
+      <div class="rule-row"><div class="rr-label">Rescate</div><div class="rr-val">Debe realizarse dentro de los primeros <strong>15 minutos</strong>. El rescate rápido se impone ante cualquier otra maniobra.</div></div>
+      <div class="rule-row"><div class="rr-label">Post-rescate</div><div class="rr-val">Colocar a la víctima en posición <strong>semi-sentada o en cuclillas</strong>. Jamás tendida de inmediato. Trasladar al policlínico acompañado.</div></div>
+      <div class="rule-row"><div class="rr-label">Inconsciente</div><div class="rr-val">Posición fetal. Mantener 20-40 minutos antes de pasar gradualmente a horizontal. Monitorear constantes vitales.</div></div>
+      <div class="info-bar" style="margin-top:.5rem">ℹ️ Debe haber disponible un plan de rescate con los medios necesarios (Alza Hombre, Kit de rescate) antes de iniciar cualquier trabajo con riesgo de caída.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Inspección del equipo — obligaciones</div>
+    <div class="card-body">
+      <p style="margin-bottom:.75rem;font-size:.9rem">El arnés y todo el SPDC debe inspeccionarse:</p>
+      <div class="two-col">
+        <div>
+          <strong style="color:#CC4E10;font-size:.88rem">Antes de cada uso (check list pre-uso):</strong>
+          <ul style="font-size:.83rem;color:#333;margin-top:.4rem">
+            <li>Tejido y correas (sin cortes, desgaste)</li>
+            <li>Piezas metálicas y remaches</li>
+            <li>Mosquetones (cierran y aseguran sin problema)</li>
+            <li>Argollas en D o anillos</li>
+            <li>Hebillas, línea de sujeción y línea de vida</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="color:#CC4E10;font-size:.88rem">Programa anual:</strong>
+          <ul style="font-size:.83rem;color:#333;margin-top:.4rem">
+            <li>Mínimo <strong>2 inspecciones anuales</strong> por persona autorizada y competente</li>
+            <li>Sistema de etiquetado para indicar cumplimiento</li>
+            <li>Registro de equipos actualizado</li>
+          </ul>
+        </div>
+      </div>
+      <div class="danger" style="margin-top:.75rem">❌ Cualquier equipo que haya sufrido el impacto de una caída debe ser separado y desechado inmediatamente, aunque parezca en buen estado.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CERTIFICADO ══════════ -->
+<div id="cert-overlay">
+  <div id="cert-box">
+    <div class="cert-top">
+      <span>CAPSTONE COPPER · MANTOVERDE</span>
+      <button onclick="closeCert()">✕</button>
+    </div>
+    <div class="cert-body">
+      <div class="cert-seal">🏆</div>
+      <h2 style="font-size:1rem;color:#6b6b6b;font-weight:400;letter-spacing:2px;text-transform:uppercase;margin-bottom:.35rem">Certificado de aprobación</h2>
+      <p style="font-size:.82rem;color:#aaa;margin-bottom:.5rem">Este certificado acredita que</p>
+      <div class="cert-name" id="cert-name-display">—</div>
+      <p style="font-size:.95rem;color:#444;margin-bottom:.25rem">ha completado exitosamente la capacitación</p>
+      <p style="font-size:1.05rem;font-weight:700;color:#1c1c1c;margin:.3rem 0">EPEF N°6 — Trabajos en Altura</p>
+      <p style="font-size:.82rem;color:#999;margin-bottom:1.25rem">Estándar CC.MV.GSSO.E006 · Capstone Copper / Mantoverde</p>
+      <hr class="cert-divider">
+      <div class="cert-meta">
+        <div><div class="cm-val" id="cert-score">8/8</div><div class="cm-lbl">Nota obtenida</div></div>
+        <div><div class="cm-val" style="color:#1e7b34">100%</div><div class="cm-lbl">Porcentaje</div></div>
+        <div><div class="cm-val" id="cert-date">—</div><div class="cm-lbl">Fecha</div></div>
+      </div>
+      <p style="font-size:.78rem;color:#bbb;margin-bottom:1.25rem">Gerencia Sulfuros — Mantoverde S.A.</p>
+      <div class="cert-actions">
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+        <button class="btn-close" onclick="closeCert()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ QUIZ ══════════ -->
+<div class="section" id="s-quiz">
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Antes de comenzar, ingresa tu nombre</div>
+    <div class="card-body">
+      <div class="name-form">
+        <label for="user-name">Nombre completo</label>
+        <input type="text" id="user-name" placeholder="Ej: Juan Pérez González" maxlength="80">
+      </div>
+      <p style="font-size:.82rem;color:#999">Necesario para generar tu certificado si apruebas con 100%.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Verifica lo que aprendiste — debes responder todo correcto para aprobar</div>
+    <div class="card-body" id="quiz-wrap">
+      <div class="progress-wrap"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+      <div id="q-body"></div>
+    </div>
+    <div class="card-body score-wrap" id="score-wrap" style="display:none">
+      <div class="score-icon" id="score-icon">📖</div>
+      <h3 id="score-title"></h3>
+      <p id="score-sub"></p>
+      <div id="cert-btn-wrap" style="display:none;margin-top:1rem">
+        <button onclick="showCert()" style="background:#1e7b34;color:#fff;border:none;border-radius:8px;padding:.75rem 2rem;font-size:1rem;cursor:pointer;font-weight:600">🏆 Ver mi certificado</button>
+      </div>
+      <button id="restart-btn" onclick="restartQuiz()">Intentar de nuevo</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>EPEF N°6 — Trabajos en Altura</strong> · Capstone Copper / Mantoverde · CC.MV.GSSO.E006 · Versión 0 · Vigente desde 01/12/2023</p>
+  <p style="margin-top:.5rem">Elaborado y aprobado por la Gerencia de Seguridad y Salud Ocupacional – Mantoverde S.A.</p>
+</footer>
+
+<script>
+const questions = [
+  {
+    q:"¿Desde qué altura aplica obligatoriamente este estándar de trabajos en altura?",
+    opts:["Cualquier altura por encima del suelo","1,5 metros o más","1,8 metros o más, o a menos de 2 m de un borde abierto con caída de 1,8 m o más","2,5 metros o más"],
+    c:2,
+    fb:"Correcto. El estándar aplica cuando existe potencial de caída desde 1,8 metros o más, o cuando una persona esté a menos de 2 metros de un borde abierto desde el cual exista potencial de caída de 1,8 m o más."
+  },
+  {
+    q:"¿Qué resistencia mínima debe tener un punto de anclaje individual?",
+    opts:["10 KN (~1.000 kg)","15 KN (~1.500 kg)","22 KN (~2.226 kg)","30 KN (~3.000 kg)"],
+    c:2,
+    fb:"Correcto. Los puntos de anclaje individuales deben soportar mínimo 22 KN (aproximadamente 2.226 kg)."
+  },
+  {
+    q:"¿Cuánto tiempo máximo puede una persona quedar suspendida del arnés antes de riesgo de trauma por suspensión?",
+    opts:["5 minutos","15 minutos","30 minutos","1 hora"],
+    c:1,
+    fb:"Correcto. El trauma por suspensión puede ocurrir en menos de 15 minutos. El rescate debe realizarse dentro de los primeros 15 minutos. Por eso se usan las cintas anti-trauma."
+  },
+  {
+    q:"¿Qué marcas de andamios están permitidas en Mantoverde?",
+    opts:["Cualquier marca certificada","Solo LAYHER","LAYHER – PERI – ULMA","PERI y cualquier equivalente aprobado"],
+    c:2,
+    fb:"Correcto. En Mantoverde solo está permitido el uso de andamios de las marcas LAYHER – PERI – ULMA. Los armadores deben tener Licencia Interna de Andamiero."
+  },
+  {
+    q:"¿Qué significa la tarjeta ROJA en un andamio?",
+    opts:["El andamio está listo para usar","El andamio es para trabajo en caliente","ANDAMIO NO OPERATIVO — nadie puede subir excepto el personal de andamios autorizado","El andamio está en inspección y puede usarse con cuidado"],
+    c:2,
+    fb:"Correcto. La tarjeta ROJA indica 'ANDAMIO NO OPERATIVO'. Durante el armado, modificación o desarme nadie puede subir, excepto el personal de andamios y supervisores específicamente autorizados."
+  },
+  {
+    q:"¿Qué debe hacerse con el equipo de protección contra caídas que sufrió el impacto de una caída?",
+    opts:["Inspeccionarlo y si está bien, seguir usándolo","Enviarlo al fabricante para revisión","Separarlo y desecharlo inmediatamente","Guardarlo y reportarlo al supervisor"],
+    c:2,
+    fb:"Correcto. Cualquier equipo que haya sufrido el impacto de una caída debe ser separado y desechado inmediatamente, aunque parezca en buen estado. La integridad interna puede estar comprometida."
+  },
+  {
+    q:"¿Cuál es el factor de caída más seguro?",
+    opts:["Factor 2 (anclaje a nivel de piso)","Factor 1 (anclaje a nivel de cintura)","Factor 0 (anclaje sobre la cabeza)","Factor 0,5 (anclaje a media altura)"],
+    c:2,
+    fb:"Correcto. Factor de Caída 0 significa que el punto de anclaje está sobre la cabeza del trabajador. Es el más seguro porque minimiza la distancia de caída libre."
+  },
+  {
+    q:"Al trabajar sobre un andamio o plataforma temporal, ¿cuánto tiempo debe estar anclado a la línea de vida?",
+    opts:["Solo al desplazarse","Cuando esté en zonas sin baranda","El 100% del tiempo usando línea de seguridad de tres puntas (Y)","Solo si la altura supera los 3 metros"],
+    c:2,
+    fb:"Correcto. Toda persona sobre andamio o plataforma temporal debe estar el 100% del tiempo amarrada a la línea de vida usando la línea de seguridad estandarizada de tres puntas (Y). Solo para desplazarse se puede soltar una línea, manteniendo siempre la segunda unida."
+  },
+];
+
+let cur=0, score=0, answered=false;
+
+function renderQ() {
+  const q = questions[cur];
+  document.getElementById('prog').style.width = (cur/questions.length*100)+'%';
+  let html = `<div class="q-num">Pregunta ${cur+1} de ${questions.length}</div><div class="q-text">${q.q}</div>`;
+  q.opts.forEach((o,i) => html += `<div class="opt" id="opt${i}" onclick="answer(${i})">${o}</div>`);
+  html += `<div class="feedback" id="fb"></div><button id="next-btn" onclick="nextQ()">${cur===questions.length-1?'Ver resultado':'Siguiente →'}</button>`;
+  document.getElementById('q-body').innerHTML = html;
+  answered = false;
+}
+
+function answer(i) {
+  if(answered) return;
+  answered = true;
+  const q = questions[cur];
+  document.querySelectorAll('.opt').forEach((el,idx) => {
+    el.style.cursor='default';
+    if(idx===q.c) el.classList.add('correct');
+    else if(idx===i&&i!==q.c) el.classList.add('wrong');
+  });
+  const fb = document.getElementById('fb');
+  fb.textContent = q.fb;
+  fb.style.display='block';
+  fb.className='feedback '+(i===q.c?'ok-f':'err-f');
+  if(i===q.c) score++;
+  document.getElementById('next-btn').style.display='inline-block';
+}
+
+function nextQ() {
+  cur++;
+  if(cur>=questions.length) showResult();
+  else renderQ();
+}
+
+function showResult() {
+  document.getElementById('prog').style.width='100%';
+  document.getElementById('quiz-wrap').style.display='none';
+  const sw = document.getElementById('score-wrap');
+  sw.style.display='block';
+  const total = questions.length;
+  const approved = score===total;
+  document.getElementById('score-icon').textContent = approved?'🏆':'📖';
+  document.getElementById('score-title').textContent = score+' de '+total+' correctas ('+Math.round(score/total*100)+'%)';
+  if(approved){
+    document.getElementById('score-sub').textContent='¡Perfecto! Respondiste todo correcto. Ya puedes obtener tu certificado.';
+    document.getElementById('score-sub').style.color='#1e7b34';
+    document.getElementById('cert-btn-wrap').style.display='block';
+  } else {
+    const wrong=total-score;
+    document.getElementById('score-sub').textContent='Tuviste '+wrong+' error'+(wrong>1?'es':'')+'. Necesitas 100% para aprobar. Revisa el material e intenta de nuevo.';
+    document.getElementById('score-sub').style.color='#c0392b';
+    document.getElementById('cert-btn-wrap').style.display='none';
+  }
+}
+
+function showCert() {
+  const nombre = document.getElementById('user-name').value.trim()||'Participante';
+  const fecha = new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'long',year:'numeric'});
+  document.getElementById('cert-name-display').textContent = nombre;
+  document.getElementById('cert-score').textContent = questions.length+'/'+questions.length;
+  document.getElementById('cert-date').textContent = fecha;
+  document.getElementById('cert-overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function closeCert() {
+  document.getElementById('cert-overlay').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+function restartQuiz() {
+  cur=0; score=0; answered=false;
+  document.getElementById('quiz-wrap').style.display='block';
+  document.getElementById('score-wrap').style.display='none';
+  renderQ();
+}
+
+function show(id) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
+  document.getElementById('s-'+id).classList.add('show');
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+  const idx=['intro','equipos','plataformas','reglas','quiz'].indexOf(id);
+  document.querySelectorAll('nav.tabs button')[idx].classList.add('active');
+  if(id==='quiz'&&cur===0&&!answered) renderQ();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.getElementById('cert-overlay').addEventListener('click',function(e){
+  if(e.target===this) closeCert();
+});
+</script>
+</body>
+</html>
